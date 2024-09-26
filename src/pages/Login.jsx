@@ -32,8 +32,6 @@ const Login = () => {
         { day: 'wed', class: 3, subject: 'GEHE=3601, HEB, CX505' },
         { day: 'wed', class: 4, subject: 'CSE-3631, OS, CX101' },
         { day: 'wed', class: 5, subject: 'CSE-3631, OS, CX101' },
-
-
       ];
       setSchedule(response);
     };
@@ -41,9 +39,9 @@ const Login = () => {
     fetchData();
   }, []);
 
-  const days = ['sat','sun','mon', 'tue', 'wed'];
-  const classes = ["10.30-11.20", "11.20-12.10", "12.10-1.00", "1.40-2.30", "2.30-3.20","3.20-4.10"];
-  const classes2 = [1, 2, 3, 4, 5,6];
+  const days = ['sat', 'sun', 'mon', 'tue', 'wed'];
+  const classes = ['10.30-11.20', '11.20-12.10', '12.10-1.00', '1.40-2.30', '2.30-3.20', '3.20-4.10'];
+  const classes2 = [1, 2, 3, 4, 5, 6];
 
   const getSubject = (day, classNumber) => {
     const found = schedule.find(
@@ -53,40 +51,44 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-black via-indigo-900 to-slate-800 flex items-center justify-center p-8">
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-4xl  shadow-blue-700">
+    <div className="min-h-screen bg-gradient-to-r from-black via-indigo-900 to-slate-800 flex items-center justify-center p-4 sm:p-8">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-4xl shadow-blue-700">
         <h1 className="text-2xl font-bold text-center text-slate-700 font-serif bg-blue-300 py-4">
           Class Schedule
         </h1>
-        <table className="table-aut w-full text-left">
-          <thead className="bg-indigo-900 text-white">
-            <tr>
-              <th className="p-4">Day</th>
-              {classes.map((classNumber) => (
-                <th key={classNumber} className=" font-bold p-4">
-                {classNumber}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {days.map((day, dayIndex) => (
-              <tr
-                key={day}
-                className={`${
-                  dayIndex % 2 === 0 ? 'bg-gradient-to-r from-gray-400 via-gray-300 to-gray-50' : 'bg-gradient-to-r to-gray-400 via-gray-300 from-gray-50'
-                } hover:bg-blue-100`}
-              >
-                <td className="p-4 text-gray-700 capitalize font-bold  ">{day}</td>
-                {classes2.map((classNumber) => (
-                  <td key={classNumber} className="p-4 text-gray-600">
-                    {getSubject(day, classNumber)}
-                  </td>
+        <div className="overflow-x-auto">
+          <table className="table-auto w-full text-left">
+            <thead className="bg-indigo-900 text-white">
+              <tr>
+                <th className="p-4">Day</th>
+                {classes.map((classNumber) => (
+                  <th key={classNumber} className="font-bold p-4">
+                    {classNumber}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {days.map((day, dayIndex) => (
+                <tr
+                  key={day}
+                  className={`${
+                    dayIndex % 2 === 0
+                      ? 'bg-gradient-to-r from-gray-400 via-gray-300 to-gray-50'
+                      : 'bg-gradient-to-r to-gray-400 via-gray-300 from-gray-50'
+                  } hover:bg-blue-100`}
+                >
+                  <td className="p-4 text-gray-700 capitalize font-bold">{day}</td>
+                  {classes2.map((classNumber) => (
+                    <td key={classNumber} className="p-4 text-gray-600">
+                      {getSubject(day, classNumber)}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
